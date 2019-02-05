@@ -1,0 +1,19 @@
+{# if statement use with {% statement %} #}
+
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Microblog</title>
+      {% else %}
+      <title>Welcome to Microblog</title>
+      {% endif %}
+    </head>
+    <body>
+        <!-- <div>
+          Microblog:
+          <a href="/index">Home</a>                                             {# simple navigation bar #}
+          <a href="/tag_me">Tag me</a>
+      </div> -->
+      {% block content %}{% endblock %}                                         {#  block control statement to define the place where the derived templates can insert themselves  #}
+    </body>
+</html>

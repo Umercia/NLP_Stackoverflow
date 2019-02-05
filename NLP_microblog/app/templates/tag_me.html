@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Post Analysis</h1>
+
+    Tag suggestion tool for stackoverflow's posts. <br />
+    Copy/Paste the Title and the Body of the post and press "Tag me". <br />
+
+    <hr>                                                                        {# horizontal line #}
+    <form action="" method="post" novalidate>                                   {# The action attribute of the form is used to tell the browser the URL that should be used when submitting the information the user entered in the form. When the action is set to an empty string the form is submitted to the URL that is currently in the address bar #}
+        {{ form.hidden_tag() }}                                                 {# the method attribute specifies the HTTP request method that should be used when submitting the form to the server. The default is to send it with a GET request, but in almost all cases, using a POST request makes for a better user experience because requests of this type can submit the form data in the body of the request, while GET requests add the form fields to the URL, cluttering the browser address bar  #}
+        <p>                                                                     {# The novalidate attribute is used to tell the web browser to not apply validation to the fields in this form, which effectively leaves this task to the Flask application running in the server #}
+            {{ form.title.label }}<br>                                          {# The form.hidden_tag() template argument generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration #}
+            {{ form.title(size=99) }}
+        </p>
+        <p>
+            {{ form.content.label }}<br>
+            {{ form.content(rows='30',cols='100') }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    More information on models here: <a href="https://github.com/Umercia/NLP_Stackoverflow/blob/master/Stackoverflow%20analysis.ipynb">GitHub</a>
+
+{% endblock %}

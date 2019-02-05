@@ -1,0 +1,10 @@
+{# Main page template #}
+
+{% extends "base.html" %}                                                       {# Inherit from base template #}
+
+{% block content %}                                                             {# block definition #}
+    <h1>Hi, {{ user.username }}!</h1>                                           {# var passed when call by return render_template('index.html', title='Home', user=user, posts=posts) #}
+    {% for post in posts %}                                                     {# for loop #}
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+{% endblock %}
